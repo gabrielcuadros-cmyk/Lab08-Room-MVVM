@@ -4,10 +4,10 @@ import androidx.room.*
 
 @Dao
 interface TaskDao {
-    @Query("SELECT * FROM tasks")
+    @Query("SELECT * FROM tasks ORDER BY id DESC")
     suspend fun getAllTasks(): List<Task>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTask(task: Task)
 
     @Update
